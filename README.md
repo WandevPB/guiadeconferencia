@@ -1,73 +1,62 @@
-# Welcome to your Lovable project
+# Guia de Conferência Brisanet
 
-## Project info
+Sistema desenvolvido para gerenciar guias de conferência para transações de itens, permitindo criar, visualizar e imprimir documentos para validação de envio e recebimento de materiais.
 
-**URL**: https://lovable.dev/projects/407b0049-4713-40aa-b8a7-9d849e2d18c5
+![Logo Brisanet](https://www.brisanet.com.br/favicon.ico)
 
-## How can I edit this code?
+## 📋 Funcionalidades
 
-There are several ways of editing your application.
+- Criação de novas transações com número de identificação
+- Adição, edição e remoção de itens
+- Geração de guias de conferência para impressão
+- Integração com Google Sheets para busca de descrições de itens por código SAP
+- Interface responsiva para todos os dispositivos
 
-**Use Lovable**
+## 🛠️ Tecnologias
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/407b0049-4713-40aa-b8a7-9d849e2d18c5) and start prompting.
+Este projeto foi desenvolvido com as seguintes tecnologias:
 
-Changes made via Lovable will be committed automatically to this repo.
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- React Router
+- React Query
 
-**Use your preferred IDE**
+## 🚀 Como executar
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Siga estes passos para executar o projeto localmente:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone o repositório
+git clone https://github.com/WandevPB/guiadeconferencia.git
 
-Follow these steps:
+# Acesse a pasta do projeto
+cd guiadeconferencia
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Instale as dependências
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Execute a aplicação
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Acesse [http://localhost:5173](http://localhost:5173) para visualizar a aplicação.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🔧 Configuração
 
-**Use GitHub Codespaces**
+Para utilizar a integração com Google Sheets, configure suas credenciais no arquivo:
+```
+src/contexts/GoogleSheetsContext.tsx
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 👨‍💻 Desenvolvedor
 
-## What technologies are used for this project?
+Projeto desenvolvido por **Wanderson Davyd**.
 
-This project is built with:
+- GitHub: [WandevPB](https://github.com/WandevPB)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📄 Licença
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/407b0049-4713-40aa-b8a7-9d849e2d18c5) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Este projeto está sob a licença MIT.
