@@ -36,65 +36,65 @@ const ConferenceDocument: React.FC = () => {
       
       {/* Documento de Conferência - Cabeçalho e Tabela */}
       <div className="items-table">
-        <Card className="w-full print:shadow-none print:border-none">
-          <CardHeader className="print:pb-0">
-            <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-3xl font-bold">GUIA DE CONFERÊNCIA</h1>
-                <p className="text-gray-500">{today}</p>
-              </div>
-              <div className="bg-brisanet-orange text-white p-4 rounded">
-                <h2 className="text-2xl font-bold">TRANSAÇÃO</h2>
-                <p className="text-xl">{currentTransaction.transactionNumber}</p>
-              </div>
+      <Card className="w-full print:shadow-none print:border-none">
+        <CardHeader className="print:pb-0">
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl font-bold">GUIA DE CONFERÊNCIA</h1>
+              <p className="text-gray-500">{today}</p>
             </div>
-          </CardHeader>
-          
-          <CardContent>
-            <div className="mt-6">
-              <table className="w-full border-collapse">
+            <div className="bg-brisanet-orange text-white p-4 rounded">
+              <h2 className="text-2xl font-bold">TRANSAÇÃO</h2>
+              <p className="text-xl">{currentTransaction.transactionNumber}</p>
+            </div>
+          </div>
+        </CardHeader>
+        
+        <CardContent>
+          <div className="mt-6">
+            <table className="w-full border-collapse">
                 <thead className="bg-gray-100 print:table-header-group">
-                  <tr>
-                    <th className="border px-4 py-2 text-left">Código SAP</th>
-                    <th className="border px-4 py-2 text-left">Descrição</th>
-                    <th className="border px-4 py-2 text-left">QTD ENVIADA</th>
-                    <th className="border px-4 py-2 text-left">QTD RECEBIDA (Motorista)</th>
-                    <th className="border px-4 py-2 text-left">QTD RECEBIDA (Conferente)</th>
-                    <th className="border px-4 py-2 text-center">Valid. Motorista</th>
-                    <th className="border px-4 py-2 text-center">Valid. Recebedor</th>
+                <tr>
+                  <th className="border px-4 py-2 text-left">Código SAP</th>
+                  <th className="border px-4 py-2 text-left">Descrição</th>
+                  <th className="border px-4 py-2 text-left">QTD ENVIADA</th>
+                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (Motorista)</th>
+                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (Conferente)</th>
+                  <th className="border px-4 py-2 text-center">Valid. Motorista</th>
+                  <th className="border px-4 py-2 text-center">Valid. Recebedor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentTransaction.items.map((item) => (
+                  <tr key={item.id}>
+                    <td className="border px-4 py-3">{item.sapCode}</td>
+                    <td className="border px-4 py-3">{item.description}</td>
+                    <td className="border px-4 py-3">{item.quantity}</td>
+                    <td className="border px-4 py-3 h-10">
+                      <div className="h-6 border-b border-dashed border-gray-400"></div>
+                    </td>
+                    <td className="border px-4 py-3 h-10">
+                      <div className="h-6 border-b border-dashed border-gray-400"></div>
+                    </td>
+                    <td className="border px-4 py-3">
+                      <div className="flex justify-center items-center">
+                        <div className="h-6 w-6 border border-gray-400"></div>
+                      </div>
+                    </td>
+                    <td className="border px-4 py-3">
+                      <div className="flex justify-center items-center">
+                        <div className="h-6 w-6 border border-gray-400"></div>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {currentTransaction.items.map((item) => (
-                    <tr key={item.id}>
-                      <td className="border px-4 py-3">{item.sapCode}</td>
-                      <td className="border px-4 py-3">{item.description}</td>
-                      <td className="border px-4 py-3">{item.quantity}</td>
-                      <td className="border px-4 py-3 h-10">
-                        <div className="h-6 border-b border-dashed border-gray-400"></div>
-                      </td>
-                      <td className="border px-4 py-3 h-10">
-                        <div className="h-6 border-b border-dashed border-gray-400"></div>
-                      </td>
-                      <td className="border px-4 py-3">
-                        <div className="flex justify-center items-center">
-                          <div className="h-6 w-6 border border-gray-400"></div>
-                        </div>
-                      </td>
-                      <td className="border px-4 py-3">
-                        <div className="flex justify-center items-center">
-                          <div className="h-6 w-6 border border-gray-400"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                ))}
+              </tbody>
+            </table>
             </div>
           </CardContent>
         </Card>
-      </div>
-      
+          </div>
+          
       {/* Seção de assinaturas */}
       <div className="signatures-section">
         <Card className="w-full print:shadow-none print:border-none">
@@ -121,10 +121,10 @@ const ConferenceDocument: React.FC = () => {
                 <p className="font-semibold mt-2">Recebedor</p>
                 <p className="text-gray-500 mt-2">Data: ___/___/______</p>
                 <p className="text-gray-500 mt-2">Matrícula: _______________</p>
-              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </CardContent>
+      </Card>
       </div>
       
       <style>{`
