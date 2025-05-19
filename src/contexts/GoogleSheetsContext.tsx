@@ -4,12 +4,16 @@ interface GoogleSheetsContextType {
   isLoading: boolean;
   error: string | null;
   getItemDescription: (sapCode: string) => Promise<string>;
+  isInitialized: boolean;
+  initializeGoogleSheets: () => void;
 }
 
 const GoogleSheetsContext = createContext<GoogleSheetsContextType>({
   isLoading: false,
   error: null,
   getItemDescription: async () => "",
+  isInitialized: false,
+  initializeGoogleSheets: () => {}
 });
 
 export const useGoogleSheets = () => useContext(GoogleSheetsContext);
@@ -20,6 +24,14 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwTvRVidOxC_LPKGtjeb7H6
 export const GoogleSheetsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const initializeGoogleSheets = () => {
+    // Esta função seria usada para inicializar a conexão com a API do Google Sheets
+    // Como a API já está configurada para chamadas diretas, apenas marcamos como inicializado
+    setIsInitialized(true);
+    console.log("GoogleSheets API inicializada com sucesso.");
+  };
 
   const getItemDescription = async (sapCode: string): Promise<string> => {
     if (!sapCode) return "";
@@ -56,6 +68,8 @@ export const GoogleSheetsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     isLoading,
     error,
     getItemDescription,
+    isInitialized,
+    initializeGoogleSheets
   };
 
   return (

@@ -1,14 +1,14 @@
-
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import ConferenceDocument from "@/components/ConferenceDocument";
 import { useTransaction } from "@/contexts/TransactionContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useGoogleSheets } from "@/contexts/GoogleSheetsContext";
 
 const ConferencePage = () => {
   const { currentTransaction } = useTransaction();
   const { isInitialized, initializeGoogleSheets } = useGoogleSheets();
+  const location = useLocation();
   
   useEffect(() => {
     if (!isInitialized) {

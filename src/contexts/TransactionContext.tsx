@@ -1,89 +1,116 @@
 import React, { createContext, useState, useContext } from "react";
-import { Item, TransactionData } from "../types";
-import { v4 as uuidv4 } from "uuid";
-import { useToast } from "@/components/ui/use-toast";
+import { TransactionData, TransactionItem } from "@/types";
+import { useTransactionHistory } from "./TransactionHistoryContext";
 
 interface TransactionContextType {
   currentTransaction: TransactionData;
+  addItem: (item: TransactionItem) => void;
+  updateItem: (sapCode: string, updates: Partial<TransactionItem>) => void;
+  removeItem: (sapCode: string) => void;
+  clearTransaction: () => void;
   setTransactionNumber: (number: string) => void;
-  addItem: (item: Omit<Item, "id">) => void;
-  updateItem: (item: Item) => void;
-  removeItem: (id: string) => void;
-  resetTransaction: () => void;
+  loadTransaction: (transaction: TransactionData) => void;
 }
 
 const TransactionContext = createContext<TransactionContextType>({
-  currentTransaction: { transactionNumber: "", items: [] },
-  setTransactionNumber: () => {},
+  currentTransaction: {
+    transactionNumber: "",
+    items: [],
+    createdAt: new Date().toISOString(),
+    status: "in_progress"
+  },
   addItem: () => {},
   updateItem: () => {},
   removeItem: () => {},
-  resetTransaction: () => {},
+  clearTransaction: () => {},
+  setTransactionNumber: () => {},
+  loadTransaction: () => {},
 });
 
 export const useTransaction = () => useContext(TransactionContext);
 
 export const TransactionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { toast } = useToast();
   const [currentTransaction, setCurrentTransaction] = useState<TransactionData>({
     transactionNumber: "",
     items: [],
+    createdAt: new Date().toISOString(),
+    status: "in_progress"
   });
 
+  const { addToHistory } = useTransactionHistory();
+
+  const addItem = (item: TransactionItem) => {
+    setCurrentTransaction((prev) => {
+      const newTransaction = {
+        ...prev,
+        items: [...prev.items, item],
+      };
+      return newTransaction;
+    });
+  };
+
+  const updateItem = (sapCode: string, updates: Partial<TransactionItem>) => {
+    setCurrentTransaction((prev) => {
+      const newItems = prev.items.map((item) =>
+        item.sapCode === sapCode ? { ...item, ...updates } : item
+      );
+      const newTransaction = {
+        ...prev,
+        items: newItems,
+      };
+      return newTransaction;
+    });
+  };
+
+  const removeItem = (sapCode: string) => {
+    setCurrentTransaction((prev) => {
+      const newItems = prev.items.filter((item) => item.sapCode !== sapCode);
+      const newTransaction = {
+        ...prev,
+        items: newItems,
+      };
+      return newTransaction;
+    });
+  };
+
+  const clearTransaction = () => {
+    const newTransaction = {
+      transactionNumber: "",
+      items: [],
+      createdAt: new Date().toISOString(),
+      status: "in_progress"
+    };
+    setCurrentTransaction(newTransaction);
+  };
+
   const setTransactionNumber = (number: string) => {
-    setCurrentTransaction((prev) => ({ ...prev, transactionNumber: number }));
-  };
-
-  const addItem = (item: Omit<Item, "id">) => {
-    const newItem = { ...item, id: uuidv4() };
-    setCurrentTransaction((prev) => ({
-      ...prev,
-      items: [...prev.items, newItem],
-    }));
-    toast({
-      title: "Item adicionado",
-      description: `${item.sapCode} - ${item.description} foi adicionado à transação.`,
+    setCurrentTransaction((prev) => {
+      const newTransaction = {
+        ...prev,
+        transactionNumber: number,
+      };
+      return newTransaction;
     });
   };
-
-  const updateItem = (item: Item) => {
-    setCurrentTransaction((prev) => ({
-      ...prev,
-      items: prev.items.map((i) => (i.id === item.id ? item : i)),
-    }));
-    toast({
-      title: "Item atualizado",
-      description: `${item.sapCode} - ${item.description} foi atualizado.`,
-    });
-  };
-
-  const removeItem = (id: string) => {
-    const itemToRemove = currentTransaction.items.find(item => item.id === id);
-    setCurrentTransaction((prev) => ({
-      ...prev,
-      items: prev.items.filter((item) => item.id !== id),
-    }));
-    if (itemToRemove) {
-      toast({
-        title: "Item removido",
-        description: `${itemToRemove.sapCode} - ${itemToRemove.description} foi removido da transação.`,
-        variant: "destructive",
-      });
-    }
-  };
-
-  const resetTransaction = () => {
-    setCurrentTransaction({ transactionNumber: "", items: [] });
+  
+  // Função para carregar uma transação do histórico
+  const loadTransaction = (transaction: TransactionData) => {
+    setCurrentTransaction(transaction);
   };
 
   const value = {
     currentTransaction,
-    setTransactionNumber,
     addItem,
     updateItem,
     removeItem,
-    resetTransaction,
+    clearTransaction,
+    setTransactionNumber,
+    loadTransaction,
   };
 
-  return <TransactionContext.Provider value={value}>{children}</TransactionContext.Provider>;
+  return (
+    <TransactionContext.Provider value={value}>
+      {children}
+    </TransactionContext.Provider>
+  );
 };

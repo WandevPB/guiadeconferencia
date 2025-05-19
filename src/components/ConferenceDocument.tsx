@@ -5,18 +5,31 @@ import { useTransaction } from "@/contexts/TransactionContext";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useTransactionHistory } from "@/contexts/TransactionHistoryContext";
 
 const ConferenceDocument: React.FC = () => {
-  const { currentTransaction, resetTransaction } = useTransaction();
+  const { currentTransaction, clearTransaction } = useTransaction();
+  const { addToHistory } = useTransactionHistory();
   const navigate = useNavigate();
   const today = format(new Date(), "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
   
   const handleNewTransaction = () => {
-    resetTransaction();
+    clearTransaction();
     navigate("/");
   };
   
   const handlePrint = () => {
+    // Salvar a transação no histórico com status "completed"
+    const completedTransaction = {
+      ...currentTransaction,
+      status: "completed",
+      createdAt: new Date().toISOString()
+    };
+    
+    // Adicionar ao histórico
+    addToHistory(completedTransaction);
+    
+    // Imprimir o documento
     window.print();
   };
 
@@ -66,7 +79,7 @@ const ConferenceDocument: React.FC = () => {
               </thead>
               <tbody>
                 {currentTransaction.items.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.sapCode}>
                     <td className="border px-4 py-3">{item.sapCode}</td>
                     <td className="border px-4 py-3">{item.description}</td>
                     <td className="border px-4 py-3">{item.quantity}</td>
