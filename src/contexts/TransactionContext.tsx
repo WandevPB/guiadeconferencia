@@ -55,7 +55,7 @@ export const TransactionProvider: React.FC<{ children: React.ReactNode }> = ({ c
         item.sapCode === sapCode ? { ...item, ...updates } : item
       );
       const newTransaction = {
-        ...prev,
+      ...prev,
         items: newItems,
       };
       return newTransaction;
@@ -66,7 +66,7 @@ export const TransactionProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setCurrentTransaction((prev) => {
       const newItems = prev.items.filter((item) => item.sapCode !== sapCode);
       const newTransaction = {
-        ...prev,
+      ...prev,
         items: newItems,
       };
       return newTransaction;
@@ -86,7 +86,7 @@ export const TransactionProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const setTransactionNumber = (number: string) => {
     setCurrentTransaction((prev) => {
       const newTransaction = {
-        ...prev,
+      ...prev,
         transactionNumber: number,
       };
       return newTransaction;

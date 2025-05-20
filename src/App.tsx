@@ -19,20 +19,20 @@ const App = () => (
     <GoogleSheetsProvider>
       <TransactionProvider>
         <TransactionHistoryProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <HashRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/items" element={<ItemsPage />} />
-                <Route path="/add-item" element={<AddItemPage />} />
-                <Route path="/conferencia" element={<ConferencePage />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </HashRouter>
-          </TooltipProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/items" element={<ItemsPage />} />
+              <Route path="/add-item" element={<AddItemPage />} />
+              <Route path="/conferencia" element={<ConferencePage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </HashRouter>
+        </TooltipProvider>
         </TransactionHistoryProvider>
       </TransactionProvider>
     </GoogleSheetsProvider>

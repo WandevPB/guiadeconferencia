@@ -6,10 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTransaction } from "@/contexts/TransactionContext";
 import { useGoogleSheets } from "@/contexts/GoogleSheetsContext";
 import { useToast } from "@/components/ui/use-toast";
-import { Item } from "@/types";
+import { TransactionItem } from "@/types";
 
 interface ItemFormProps {
-  editingItem?: Item;
+  editingItem?: TransactionItem;
   onCancel?: () => void;
 }
 
@@ -128,8 +128,10 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onCancel }) => {
     };
 
     if (editingItem) {
-      updateItem({ ...item, id: editingItem.id });
+      // Atualizar item existente usando o sapCode
+      updateItem(sapCode, item);
     } else {
+      // Adicionar novo item
       addItem(item);
       // Reset form after adding
       setSapCode("");
@@ -162,6 +164,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onCancel }) => {
               onChange={handleSapCodeChange}
               className="border-2 border-gray-300"
               required
+              readOnly={!!editingItem} // Bloquear edição do código SAP ao editar
             />
           </div>
           

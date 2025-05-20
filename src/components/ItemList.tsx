@@ -1,33 +1,32 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { useTransaction } from "@/contexts/TransactionContext";
-import { Item } from "@/types";
+import { TransactionItem } from "@/types";
 import ItemForm from "./ItemForm";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { X, Edit } from "lucide-react";
 
 const ItemList: React.FC = () => {
   const { currentTransaction, removeItem } = useTransaction();
-  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [editingSapCode, setEditingSapCode] = useState<string | null>(null);
   
-  const handleEditItem = (id: string) => {
-    setEditingItemId(id);
+  const handleEditItem = (sapCode: string) => {
+    setEditingSapCode(sapCode);
   };
   
   const handleCancelEdit = () => {
-    setEditingItemId(null);
+    setEditingSapCode(null);
   };
   
   const editingItem = currentTransaction.items.find(
-    (item) => item.id === editingItemId
+    (item) => item.sapCode === editingSapCode
   );
 
   return (
     <div className="space-y-4">
-      {editingItemId && editingItem ? (
+      {editingSapCode && editingItem ? (
         <ItemForm editingItem={editingItem} onCancel={handleCancelEdit} />
       ) : (
         <>
@@ -54,7 +53,7 @@ const ItemList: React.FC = () => {
                   </TableHeader>
                   <TableBody>
                     {currentTransaction.items.map((item) => (
-                      <TableRow key={item.id} className="border-b">
+                      <TableRow key={item.sapCode} className="border-b">
                         <TableCell>{item.sapCode}</TableCell>
                         <TableCell>{item.description}</TableCell>
                         <TableCell>{item.quantity}</TableCell>
@@ -63,7 +62,7 @@ const ItemList: React.FC = () => {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => handleEditItem(item.id)}
+                              onClick={() => handleEditItem(item.sapCode)}
                               className="h-8 w-8 p-0"
                             >
                               <Edit className="h-4 w-4" />
@@ -88,7 +87,7 @@ const ItemList: React.FC = () => {
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancelar</AlertDialogCancel>
                                   <AlertDialogAction 
-                                    onClick={() => removeItem(item.id)}
+                                    onClick={() => removeItem(item.sapCode)}
                                     className="bg-destructive text-destructive-foreground"
                                   >
                                     Excluir

@@ -27,7 +27,7 @@ const Index = () => {
     // Navegar para a página de conferência
     navigate("/conferencia");
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
