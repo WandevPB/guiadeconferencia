@@ -58,11 +58,11 @@ const ConferenceDocument: React.FC = () => {
               
               <div className="mt-4 flex gap-6">
                 <div>
-                  <p className="font-bold">DE:</p>
+                  <p className="font-bold">ORIGEM:</p>
                   <p className="text-lg">{currentTransaction.origin}</p>
                 </div>
                 <div>
-                  <p className="font-bold">PARA:</p>
+                  <p className="font-bold">DESTINO:</p>
                   <p className="text-lg">{currentTransaction.destination}</p>
                 </div>
               </div>

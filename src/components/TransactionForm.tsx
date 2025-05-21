@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,9 @@ import { useToast } from "@/components/ui/use-toast";
 
 const TransactionForm: React.FC = () => {
   const [transactionNumber, setTransactionNumber] = useState("");
-  const { setTransactionNumber: setContextTransactionNumber } = useTransaction();
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
+  const { setTransactionNumber: setContextTransactionNumber, setTransactionDetails } = useTransaction();
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,7 +23,19 @@ const TransactionForm: React.FC = () => {
       });
       return;
     }
+    
+    if (!origin.trim() || !destination.trim()) {
+      toast({
+        title: "Erro",
+        description: "Campos ORIGEM e DESTINO são obrigatórios.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setContextTransactionNumber(transactionNumber);
+    setTransactionDetails(origin, destination);
+    
     toast({
       title: "Transação iniciada",
       description: `Transação ${transactionNumber} foi iniciada.`,
@@ -49,6 +62,35 @@ const TransactionForm: React.FC = () => {
               required
             />
           </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="origin" className="font-bold">
+              ORIGEM
+            </Label>
+            <Input
+              id="origin"
+              placeholder=""
+              value={origin}
+              onChange={(e) => setOrigin(e.target.value)}
+              className="border-2 border-gray-300"
+              required
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="destination" className="font-bold">
+              DESTINO
+            </Label>
+            <Input
+              id="destination"
+              placeholder=""
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              className="border-2 border-gray-300"
+              required
+            />
+          </div>
+          
           <Button 
             type="submit" 
             className="w-full bg-brisanet-orange hover:bg-orange-700 text-white"
