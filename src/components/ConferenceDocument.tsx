@@ -55,6 +55,17 @@ const ConferenceDocument: React.FC = () => {
             <div>
               <h1 className="text-3xl font-bold">GUIA DE CONFERÊNCIA</h1>
               <p className="text-gray-500">{today}</p>
+              
+              <div className="mt-4 flex gap-6">
+                <div>
+                  <p className="font-bold">DE:</p>
+                  <p className="text-lg">{currentTransaction.origin}</p>
+                </div>
+                <div>
+                  <p className="font-bold">PARA:</p>
+                  <p className="text-lg">{currentTransaction.destination}</p>
+                </div>
+              </div>
             </div>
             <div className="bg-brisanet-orange text-white p-4 rounded">
               <h2 className="text-2xl font-bold">TRANSAÇÃO</h2>
@@ -70,9 +81,9 @@ const ConferenceDocument: React.FC = () => {
                 <tr>
                   <th className="border px-4 py-2 text-left">Código SAP</th>
                   <th className="border px-4 py-2 text-left">Descrição</th>
-                  <th className="border px-4 py-2 text-left">QTD ENVIADA</th>
-                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (Motorista)</th>
-                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (Conferente)</th>
+                  <th className="border px-4 py-2 text-left">QTD</th>
+                  <th className="border px-4 py-2 text-left">QTD ENVIADA (ORIGEM)</th>
+                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (DESTINO)</th>
                   <th className="border px-4 py-2 text-center">Valid. Motorista</th>
                   <th className="border px-4 py-2 text-center">Valid. Recebedor</th>
                 </tr>
