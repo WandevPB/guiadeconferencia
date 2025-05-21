@@ -69,7 +69,7 @@ const TransactionForm: React.FC = () => {
             </Label>
             <Input
               id="origin"
-              placeholder=""
+              placeholder="Digite a origem do material"
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
               className="border-2 border-gray-300"
@@ -83,7 +83,7 @@ const TransactionForm: React.FC = () => {
             </Label>
             <Input
               id="destination"
-              placeholder=""
+              placeholder="Digite o destino do material"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="border-2 border-gray-300"
