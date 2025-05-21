@@ -79,11 +79,11 @@ const ConferenceDocument: React.FC = () => {
             <table className="w-full border-collapse">
                 <thead className="bg-gray-100 print:table-header-group">
                 <tr>
-                  <th className="border px-4 py-2 text-left">Código SAP</th>
-                  <th className="border px-4 py-2 text-left">Descrição</th>
-                  <th className="border px-4 py-2 text-left">QTD</th>
-                  <th className="border px-4 py-2 text-left">QTD ENVIADA (ORIGEM)</th>
-                  <th className="border px-4 py-2 text-left">QTD RECEBIDA (DESTINO)</th>
+                  <th className="border px-4 py-2 text-center">Código SAP</th>
+                  <th className="border px-4 py-2 text-center">Descrição</th>
+                  <th className="border px-4 py-2 text-center">QTD</th>
+                  <th className="border px-4 py-2 text-center">QTD ENVIADA (ORIGEM)</th>
+                  <th className="border px-4 py-2 text-center">QTD RECEBIDA (DESTINO)</th>
                   <th className="border px-4 py-2 text-center">Valid. Motorista</th>
                   <th className="border px-4 py-2 text-center">Valid. Recebedor</th>
                 </tr>
@@ -91,13 +91,13 @@ const ConferenceDocument: React.FC = () => {
               <tbody>
                 {currentTransaction.items.map((item) => (
                   <tr key={item.sapCode}>
-                    <td className="border px-4 py-3">{item.sapCode}</td>
-                    <td className="border px-4 py-3">{item.description}</td>
-                    <td className="border px-4 py-3">{item.quantity}</td>
-                    <td className="border px-4 py-3 h-10">
+                    <td className="border px-4 py-3 text-center">{item.sapCode}</td>
+                    <td className="border px-4 py-3 text-center">{item.description}</td>
+                    <td className="border px-4 py-3 text-center">{item.quantity}</td>
+                    <td className="border px-4 py-3 h-10 text-center">
                       <div className="h-6 border-b border-dashed border-gray-400"></div>
                     </td>
-                    <td className="border px-4 py-3 h-10">
+                    <td className="border px-4 py-3 h-10 text-center">
                       <div className="h-6 border-b border-dashed border-gray-400"></div>
                     </td>
                     <td className="border px-4 py-3">
