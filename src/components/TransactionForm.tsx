@@ -57,7 +57,7 @@ const TransactionForm: React.FC = () => {
               id="transactionNumber"
               placeholder="Digite o número da transação"
               value={transactionNumber}
-              onChange={(e) => setTransactionNumber(e.target.value)}
+              onChange={(e) => setTransactionNumber(e.target.value.toUpperCase())}
               className="border-2 border-gray-300"
               required
             />
@@ -71,7 +71,7 @@ const TransactionForm: React.FC = () => {
               id="origin"
               placeholder="Digite a origem do material"
               value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
+              onChange={(e) => setOrigin(e.target.value.toUpperCase())}
               className="border-2 border-gray-300"
               required
             />
@@ -85,7 +85,7 @@ const TransactionForm: React.FC = () => {
               id="destination"
               placeholder="Digite o destino do material"
               value={destination}
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={(e) => setDestination(e.target.value.toUpperCase())}
               className="border-2 border-gray-300"
               required
             />
